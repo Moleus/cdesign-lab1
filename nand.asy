@@ -1,18 +1,17 @@
 Version 4
 SymbolType BLOCK
-LINE Normal 48 0 0 -32
-LINE Normal 0 32 48 0
-LINE Normal 0 -32 0 32
-LINE Normal 80 0 56 0
-LINE Normal 0 -16 -32 -16
-LINE Normal 0 16 -32 16
-CIRCLE Normal 56 -4 48 4
+LINE Normal 48 0 24 0
+LINE Normal -8 -16 -32 -16
+LINE Normal -8 16 -32 16
+LINE Normal -8 32 -8 -32
+CIRCLE Normal 24 -4 16 4
+ARC Normal -32 -32 16 32 -8 32 -8 -32
 PIN -32 -16 BOTTOM 8
 PINATTR PinName A
 PINATTR SpiceOrder 1
 PIN -32 16 TOP 8
 PINATTR PinName B
 PINATTR SpiceOrder 2
-PIN 80 0 TOP 8
+PIN 48 0 TOP 8
 PINATTR PinName C
 PINATTR SpiceOrder 3

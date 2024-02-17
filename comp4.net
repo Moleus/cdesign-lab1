@@ -1,0 +1,43 @@
+* C:\users\krot\Desktop\study\itmo-prog\sem6\cdesign\lab1\comp4.asc
+XX2 a1_eq_b1 N005 N004 vdd nand
+XX3 N003 N004 a_greater_b_2bit vdd nand
+XX5 B0 B0 not_b0 vdd nand
+XX7 A0 A0 not_a0 vdd nand
+V1 vdd 0 1
+XX9 N002 N002 a0_eq_b0 vdd nand
+XX10 A0 B0 N002 vdd xor
+XX11 A0 not_b0 N006 vdd nand
+XX12 N006 N006 N005 vdd nand
+XX14 N001 N001 a1_eq_b1 vdd nand
+XX15 A1 B1 N001 vdd xor
+XX17 B1 B1 not_b1 vdd nand
+XX19 A1 A1 not_a1 vdd nand
+XX20 A1 not_b1 N003 vdd nand
+V2 A0 0 PULSE(0 1 0 10p 10p 8n 16n)
+V3 A1 0 PULSE(0 1 0 10p 10p 4n 8n)
+V4 B0 0 PULSE(0 1 0 10p 10p 2n 4n)
+V5 B1 0 PULSE(0 1 0 10p 10p 1n 2n)
+
+* block symbol definitions
+.subckt nand VIN1 VIN2 VOUT VDD
+M1 VDD VIN1 VOUT VDD PMOS l=90n w=400n
+M2 VDD VIN2 VOUT VDD PMOS l=90n w=400n
+M3 VOUT VIN1 N001 0 NMOS l=90n w=200n
+M4 N001 VIN2 0 0 NMOS l=90n w=200n
+.ends nand
+
+.subckt xor A B VOUT VDD
+XX1 N001 N003 VOUT vdd nand
+XX2 N002 B N003 vdd nand
+XX3 A N002 N001 vdd nand
+XX4 A B N002 vdd nand
+.ends xor
+
+.model NMOS NMOS
+.model PMOS PMOS
+.lib C:\users\krot\Documents\LTspiceXVII\lib\cmp\standard.mos
+* a0 AND NOT b0
+* a1 NAND NOT b1
+.tran 16n
+.backanno
+.end

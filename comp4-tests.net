@@ -12,14 +12,13 @@ V16 B1 0 1
 
 * block symbol definitions
 .subckt comp4 A_GR_B B_GR_A A_EQ_B A0 A1 A2 A3 B0 B1 B2 B3 VDD
-XX2 a1_eq_b1 N011 N010 vdd nand
-XX3 a_greater_b_1bit N010 a_greater_b_2bit vdd nand
+XX2 x1_and_x2_and_x3 N018 N015 vdd nand
+XX3 N014 N015 N013 vdd nand
 XX5 B0 B0 not_b0 vdd nand
 XX7 A0 A0 not_a0 vdd nand
 XX9 N001 N001 a0_eq_b0 vdd nand
 XX10 A0 B0 N001 vdd xor
-XX11 A0 not_b0 N012 vdd nand
-XX12 N012 N012 N011 vdd nand
+XX12 N020 N020 N018 vdd nand
 XX14 N002 N002 a1_eq_b1 vdd nand
 XX15 A1 B1 N002 vdd xor
 XX17 B1 B1 not_b1 vdd nand
@@ -28,25 +27,28 @@ XX1 B2 B2 not_b2 vdd nand
 XX4 A2 A2 not_a2 vdd nand
 XX6 N003 N003 a2_eq_b2 vdd nand
 XX8 A2 B2 N003 vdd xor
-XX13 A2 not_b2 N013 vdd nand
-XX16 a2_eq_b2 a_greater_b_2bit N014 vdd nand
-XX18 N013 N014 a_greater_b_3bit vdd nand
-XX21 A3 not_b3 N015 vdd nand
-XX22 a3_eq_b3 a_greater_b_3bit N016 vdd nand
-XX23 N015 N016 A_GR_B vdd nand
+XX13 A2 not_b2 N010 vdd nand
+XX16 x2_and_x3 N013 N012 vdd nand
+XX18 N010 N012 N011 vdd nand
+XX21 A3 not_b3 N008 vdd nand
+XX22 a3_eq_b3 N011 N009 vdd nand
+XX23 N008 N009 A_GR_B vdd nand
 XX24 N004 N004 a3_eq_b3 vdd nand
 XX25 A3 B3 N004 vdd xor
 XX26 B3 B3 not_b3 vdd nand
 XX27 A3 A3 not_a3 vdd nand
-XX28 A1 not_b1 a_greater_b_1bit vdd nand
-XX20 a0_eq_b0 a1_eq_b1 N005 vdd nand
-XX29 a2_eq_b2 a3_eq_b3 N009 vdd nand
-XX30 N005 N005 N006 vdd nand
-XX31 N009 N009 N008 vdd nand
-XX32 N006 N008 N007 vdd nand
-XX33 N007 N007 A_EQ_B vdd nand
-XX34 A_GR_B a_eq_b N017 vdd xor
-XX35 N017 N017 B_GR_A vdd nand
+XX28 A0 not_b0 N020 vdd nand
+XX29 a2_eq_b2 a3_eq_b3 N005 vdd nand
+XX31 N005 N005 x2_and_x3 vdd nand
+XX35 N016 N019 N017 vdd nand
+XX36 A1 not_b1 N014 vdd nand
+XX38 x2_and_x3 a1_eq_b1 N006 vdd nand
+XX39 N006 N006 x1_and_x2_and_x3 vdd nand
+XX40 x1_and_x2_and_x3 a0_eq_b0 N007 vdd nand
+XX41 N007 N007 a_eq_b vdd nand
+XX11 A_GR_B A_GR_B N016 vdd nand
+XX20 a_eq_b a_eq_b N019 vdd nand
+XX30 N017 N017 B_GR_A vdd nand
 .ends comp4
 
 .subckt nand VIN1 VIN2 VOUT VDD
@@ -66,6 +68,7 @@ XX4 A B N002 vdd nand
 .model NMOS NMOS
 .model PMOS PMOS
 .lib C:\users\krot\Documents\LTspiceXVII\lib\cmp\standard.mos
-.tran 0 2n 0n
+.tran 0 4n 0n
+.include 90nm_bulk.txt
 .backanno
 .end
